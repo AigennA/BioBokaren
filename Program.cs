@@ -55,7 +55,7 @@ class Program
         }
     }
 
-    // C. Metoder (utan returvärde)
+  
     // ShowMenu()
     static void ShowMenu()
     {
