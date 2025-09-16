@@ -4,12 +4,12 @@ namespace BioBokaren
 {
     internal class Program
     {
-        //Konstanter
+        //constans
         const double TAX_RATE = 0.08;
         const double STUDENT_DISCOUNT = 0.20;
         const string CURRENCY = "SEK";
 
-        //Programdata of films
+        //Programdata - films
         static string[] movies = { "The Green Mile", "Inception", "Interstellar", "Forrest Gump", "Terminator 2" };
         static string[] showTimes = { "14:30", "16:00", "18:00", "20:30", "22:00" };
         static double[] basePrices = { 110.0, 120.0, 130.0, 140.0, 155.0 };
@@ -27,7 +27,7 @@ namespace BioBokaren
             while (running)
             {
                 ShowMenu();
-                Console.Write("Välj ett alternativ: ");
+                Console.Write("Choose an alternative: ");
                 string input = Console.ReadLine();
 
                 switch (input)
@@ -44,7 +44,7 @@ namespace BioBokaren
                     case "4":
                         if (selectedMovieIndex == -1 || selectedTimeIndex == -1 || ticketCount == 0)
                         {
-                            Console.WriteLine("Du måste göra en bokning innan du kan skriva ut kvitto.");
+                            Console.WriteLine("You should have a booing before you can print out receipt.");
                         }
                         else
                         {
@@ -59,90 +59,90 @@ namespace BioBokaren
                         break;
                     case "5":
                         running = false;
-                        Console.WriteLine("Tack för att du använde BioApp. Ha en trevlig dag!");
+                        Console.WriteLine("Thank you for choosing BioApp. Welcome back!");
                         break;
                     default:
-                        Console.WriteLine("Ogiltigt val, försök igen.");
+                        Console.WriteLine("Invalid choose, try again.");
                         break;
                 }
             }
         }
 
-        //Meny
+        //Menu
         static void ShowMenu()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nBIOBOKNING");
             Console.ResetColor();
-            Console.WriteLine("1. Lista filmer");
-            Console.WriteLine("2. Välj film, tid och antal biljetter");
-            Console.WriteLine("3. Lägg på/ ta bort studentrabatt");
-            Console.WriteLine("4. Skriv ut kvitto");
-            Console.WriteLine("5. Avsluta"); //Tackar användaren
+            Console.WriteLine("1. List films");
+            Console.WriteLine("2. Select films, time and number of tickets");
+            Console.WriteLine("3. Add/ remove student discount");
+            Console.WriteLine("4. Print receipt");
+            Console.WriteLine("5. Exit");//User can se this message"Thank you for choosing BioApp. Welcome back!"
         }
 
-        //Lista filmer
+        //List films
         static void ListMovies(string[] movies, string[] times, double[] basePrices)
         {
             if (movies.Length != times.Length || movies.Length != basePrices.Length)
             {
-                Console.WriteLine("Fel i programdata: Arrayerna har olika längd.");
+                Console.WriteLine("Error in program data: The arrays have different lengths.");
                 return;
             }
            
-            Console.WriteLine("\nTillgängliga filmer:");
+            Console.WriteLine("\nAvailable movies:");
             for (int i = 0; i < movies.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {movies[i]} - Tid: {times[i]} - Pris: {basePrices[i]} {CURRENCY}");
             }
         }
 
-        //Välj film och biljetter
+        //Select film and tickets
         static void SelectMovieAndTickets()
         {
             ListMovies(movies, showTimes, basePrices);
 
-            Console.Write($"Ange filmnummer (1-{movies.Length}): ");
+            Console.Write($"Enter movie number (1-{movies.Length}): ");
             if (int.TryParse(Console.ReadLine(), out int movieIndex) && movieIndex >= 1 && movieIndex <= movies.Length)
             {
                 selectedMovieIndex = movieIndex - 1;
             }
             else
             {
-                Console.WriteLine("Ogiltigt filmval.");
+                Console.WriteLine("Invalid movie selection.");
                 return;
             }
 
-            Console.Write($"Ange visningstid (1-{showTimes.Length}): ");
+            Console.Write($"Set viewing time(1-{showTimes.Length}): ");
             if (int.TryParse(Console.ReadLine(), out int timeIndex) && timeIndex >= 1 && timeIndex <= showTimes.Length)
             {
                 selectedTimeIndex = timeIndex - 1;
             }
             else
             {
-                Console.WriteLine("Ogiltig tid.");
+                Console.WriteLine("Invalid time.");
                 return;
             }
 
-            Console.Write("Ange antal biljetter: ");
+            Console.Write("Number of tickets: ");
             if (int.TryParse(Console.ReadLine(), out int tickets) && tickets > 0)
             {
                 ticketCount = tickets;
             }
             else
             {
-                Console.WriteLine("Ogiltigt antal.");
+                Console.WriteLine("Invalid number.");
             }
         }
 
-        //Studentrabatt
+        //Student discount
         static void ToggleStudentDiscount()
         {
             isStudent = !isStudent;
-            Console.WriteLine(isStudent ? "Studentrabatt aktiverad." : "Studentrabatt avaktiverad.");
+            Console.WriteLine(isStudent ? "Student discount activated." : "Student discount deactivated.");
         }
 
-        //Prisberäkning
+        //Pricecounting
         static double CalculatePrice(int tickets, double basePrice)
         {
             return tickets * basePrice;
@@ -154,7 +154,7 @@ namespace BioBokaren
             return tickets * discountedPrice;
         }
 
-        //Totalpris med moms
+        //Totalprice med moms
         static double CalculateTotalPrice()
         {
             double basePrice = basePrices[selectedMovieIndex];
@@ -165,7 +165,7 @@ namespace BioBokaren
             return subtotal * (1 + TAX_RATE);
         }
 
-        //Kvitto
+        //Receipt
         static void PrintReceipt(string movie, string time, int tickets, double total, bool isStudent)
         {
             Console.ForegroundColor = ConsoleColor.Green;
