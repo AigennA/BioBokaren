@@ -9,7 +9,7 @@ namespace BioBokaren
         const double STUDENT_DISCOUNT = 0.20;
         const string CURRENCY = "SEK";
 
-        //Programdata
+        //Programdata of films
         static string[] movies = { "The Green Mile", "Inception", "Interstellar", "Forrest Gump", "Terminator 2" };
         static string[] showTimes = { "14:30", "16:00", "18:00", "20:30", "22:00" };
         static double[] basePrices = { 110.0, 120.0, 130.0, 140.0, 155.0 };
@@ -78,7 +78,7 @@ namespace BioBokaren
             Console.WriteLine("2. Välj film, tid och antal biljetter");
             Console.WriteLine("3. Lägg på/ ta bort studentrabatt");
             Console.WriteLine("4. Skriv ut kvitto");
-            Console.WriteLine("5. Avsluta");
+            Console.WriteLine("5. Avsluta"); //Tackar användaren
         }
 
         //Lista filmer
